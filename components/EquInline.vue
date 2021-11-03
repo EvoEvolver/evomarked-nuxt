@@ -5,17 +5,16 @@
 <script>
 
 export default {
-  inject: ["katexAPI"],
+  inject: ["katexAPI", "pageEnv"],
   props: ["tex"],
-  methods:{
-    typeset(){
-      if(this.tex)
-      this.katexAPI.render(this.tex, this.$refs.math, {
-        throwOnError: false,
-        macros:{
-          "\\innerp":"123"
+  methods: {
+    typeset() {
+      if (this.tex)
+        this.katexAPI.render(this.tex, this.$refs.math, {
+          throwOnError: false,
+          macros: this.pageEnv.mathMacros
         }
-      });
+        );
     }
   },
   mounted() {

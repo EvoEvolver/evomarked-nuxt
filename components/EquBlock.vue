@@ -5,13 +5,14 @@
 <script>
 
 export default {
-  inject: ["katexAPI"],
+  inject: ["katexAPI","pageEnv"],
   props: ["tex"],
   mounted() {
-    if (this.tex) 
+    if (this.tex)
       this.katexAPI.render(this.tex, this.$refs.math, {
         throwOnError: false,
-        displayMode: true
+        displayMode: true,
+        macros: this.pageEnv.mathMacros
       });
   },
   watch: {

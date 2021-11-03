@@ -3,3 +3,7 @@ node_modules
 .nuxt
 nuxt.d.ts
 .output
+
+pages
+page_assets
+assets

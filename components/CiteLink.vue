@@ -1,6 +1,6 @@
 <template>
-  <SmartLink :target="citingKeyIds">
-    [<span
+[<SmartLink :target="citingKeyIds">
+    <span
       class="cite-link"
       v-for="(item, index) in tagGroups"
       :key="index"
@@ -8,10 +8,12 @@
         '#cite-def-' +
         citedKeys[Number(Array.isArray(item) ? item[0] : item) - 1]
       "
-    >
-      {{ Array.isArray(item) ? item[0] + "-" + item[1] : item }} </span
-    >]
+    >{{ Array.isArray(item) ? item[0] + "-" + item[1] : item }}</span>
   </SmartLink>
+  <HoverTip v-if="missedKeys" interactive="true">?<template v-slot:tip>
+      Missing key: <strong v-for="(item, index) in missedKeys"> {{item+" "}} </strong>
+    </template>
+  </HoverTip>]
 </template>
 <script>
 import HoverTip from "./HoverTip.vue";
@@ -19,7 +21,14 @@ import SmartLink from "./SmartLink.vue";
 export default {
   methods: {},
   inject: ["pageEnv"],
-  props: ["citingKey"],
+  props: {
+    citingKey:{
+      default:()=>[]
+    },
+    missedKeys:{
+      default:null
+    }
+  },
   components: {
     HoverTip: HoverTip,
     SmartLink,
@@ -53,7 +62,7 @@ export default {
 
       let tagGroups = [];
 
-      for (let i = 0; i < tagList.length; ) {
+      for (let i = 0; i < tagList.length;) {
         let groupLen = 1;
         for (let j = i + 1; j < tagList.length; j++) {
           if (tagList[j] != tagList[j - 1] + 1) break;

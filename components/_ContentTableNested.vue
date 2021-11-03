@@ -6,9 +6,7 @@
           class="content-list-link"
           :href="'#' + section.id"
           :index="section.index.join('.')"
-        >
-          {{ section.title }}</a
-        >
+        >{{ section.title }}</a>
       </li>
       <ContentTableNested v-else :contentList="section"></ContentTableNested>
     </template>

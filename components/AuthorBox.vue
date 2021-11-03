@@ -1,29 +1,34 @@
 <template>
   <div class="author-box">
     <div class="author-list">
-      <span
-        class="author-entry"
-        v-for="(author, index) of authorList"
-        :key="index"
-      >
+      <span class="author-entry" v-for="(author, index) of authorList" :key="index">
         {{ author.givenName + " " + author.familyName }}
         <sup v-if="author.affil || author.note">
+          <!--
           <a
             v-for="(affil, index) of author.affil"
             :key="index"
             class="author-sup-link"
             :href="'#affil-def-' + affil"
           >
+         
             {{ affilIndices[affil] }}</a
           >
+          -->
+          <HoverTip
+            v-for="(affil, index) of author.affil"
+            :key="index"
+            :href="'#affil-def-' + affil"
+          >
+            <a class="author-sup-link" :href="'#affil-def-' + affil" >{{ affilIndices[affil]}}{{" "}} </a>
+            <template v-slot:tip> {{affilDict[affil]}}</template>
+          </HoverTip>
           <a
             v-for="(note, index) of author.note"
             :key="index"
             class="author-sup-link"
             :href="'#note-def-' + note"
-          >
-            {{ getSupSymbol(noteIndices[note]) }}</a
-          >
+          >{{ getSupSymbol(noteIndices[note]) }}</a>
         </sup>
       </span>
     </div>
@@ -34,7 +39,7 @@
         class="author-note-define"
         :id="'affil-def-' + key"
       >
-      <sup>{{ index+1 }}</sup>
+        <sup>{{ index + 1 }}</sup>
         {{ affilDict[key] }}
       </p>
       <p
@@ -43,7 +48,7 @@
         class="author-note-define"
         :id="'note-def-' + key"
       >
-      <sup>{{ getSupSymbol(value) }}</sup>
+        <sup>{{ getSupSymbol(value) }}</sup>
         {{ authorNotes[key] }}
       </p>
       <p></p>
@@ -67,7 +72,7 @@ export default {
   },
   methods: {
     getSupSymbol: function (index) {
-      return noteSupChar[(index-1) % noteSupCharLen];
+      return noteSupChar[(index - 1) % noteSupCharLen];
     },
   },
 };

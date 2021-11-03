@@ -1,54 +1,55 @@
 <template>
-  <div class="tooltip">
+  <span ref="shower" @mouseover="loadTip()" @click="loadTip()">
     <slot></slot>
-    <div :class="showTip ? 'tooltiptext' : 'hide'">
-      <slot name="tip"> </slot>
-    </div>
-  </div>
+  </span>
+  <span style="display: none">
+    <span ref="tooltip">
+      <slot name="tip"></slot>
+    </span>
+  </span>
 </template>
 
 <script>
+import tippy from 'tippy.js';
+import 'tippy.js/dist/tippy.css'; // optional for styling
+import 'tippy.js/themes/light.css';
+import 'tippy.js/animations/shift-away.css';
+
 export default {
-  props: {
-    showTip: {
-      type: Boolean,
-      default: true,
-    },
+  data(){
+    return {
+      needLoad: true
+    }
   },
+  props: {
+    interactive:{
+      default:false
+    }
+  },
+  mounted() {
+
+  },
+  watch: {
+  },
+  methods: {
+    loadTip() {
+      if(!this.needLoad) return
+      let tippyOption = {
+        content: this.$refs.tooltip.cloneNode(true),
+        theme: 'light',
+        animation: 'shift-away',
+      }
+      if(this.interactive){
+        tippyOption.interactive = true
+        tippyOption.appendTo = document.body
+      }
+      tippy(this.$refs.shower, tippyOption)
+      this.needLoad = false
+    }
+  }
 };
 </script>
 
 <style lang="sass" scoped>
-$tip-width: 500px
-$box-color: white //rgba(0,0,0,0.8)
-.tooltip
-    position: relative
-    display: inline-block
-    color: #0084d1
 
-    & .tooltiptext
-        visibility: hidden
-        width: $tip-width
-        background-color: $box-color
-        
-        color: rgba(0,0,0,1)
-        padding: 5px 30px
-        //border: 1px solid
-        box-shadow: 0 0 5px 5px white
-        position: absolute
-        z-index: 1
-        bottom: 95%
-        left: 0%
-        margin-left: (-$tip-width*0.5)
-
-        opacity: 0
-        transition: opacity 0.3s
-
-    &:hover .tooltiptext
-        visibility: visible
-        opacity: 1
-        transition-delay: 0.5s
-
-    &:hover .hide
-        visibility: hidden
 </style>

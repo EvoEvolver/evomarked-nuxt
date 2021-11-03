@@ -1,14 +1,17 @@
 <template>
-  <HoverTip @mouseenter="loadTip()" @click="loadTip()" :showTip="hasContent">
-    <slot></slot>
-    <template v-slot:tip>
-      <div ref="targetList" class="preview-box"></div>
-    </template>
-  </HoverTip>
+  <span @mouseenter="loadTip()" @click="loadTip()" :showTip="hasContent">
+  <a ref="shower" class="preview-box" @click="goToHash(target)">
+<slot></slot>
+  </a>
+    <!--<div style="hide" ref="targetList" class="preview-box" @click="goToHash(target)"></div>-->
+  </span>
 </template>
 
 <script>
-import HoverTip from "./HoverTip.vue";
+import tippy from 'tippy.js';
+import 'tippy.js/dist/tippy.css'; // optional for styling
+import 'tippy.js/themes/light.css';
+import 'tippy.js/animations/shift-away.css';
 export default {
   data() {
     return {
@@ -18,16 +21,17 @@ export default {
   },
   props: ["target"],
   components: {
-    HoverTip: HoverTip,
   },
   methods: {
+    
     loadTip() {
       if (!this.needLoad) {
         return;
       }
       let hasContent = false;
       let needLoad = false;
-      let targetList = this.$refs.targetList;
+      let targetList = document.createElement("div")//this.$refs.targetList;
+      //console.log(targetList)
       targetList.innerHTML = "";
       for (let id of this.target) {
         let targetNode = document.getElementById(id);
@@ -35,12 +39,28 @@ export default {
           needLoad = true;
           continue;
         }
-        targetList.appendChild(targetNode.cloneNode(true));
+        let cloneNode = targetNode.cloneNode(true)
+        cloneNode.setAttribute("id", null)
+        targetList.appendChild(cloneNode);
         hasContent = true;
       }
       this.needLoad = needLoad;
       this.hasContent = hasContent;
+      tippy(this.$refs.shower,{
+        content: targetList,
+        theme: 'light',
+        animation: 'shift-away',
+        interactive: true,
+        appendTo: document.body
+      })
+
     },
+    goToHash(target) {
+      let targetNode = document.getElementById(target);
+      if (targetNode) {
+        targetNode.scrollIntoView();
+      }
+    }
   },
 };
 </script>

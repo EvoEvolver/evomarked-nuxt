@@ -13,7 +13,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props:["name"]
+};
 </script>
 
 <style lang="sass" src="~/assets/style/evomark.sass">

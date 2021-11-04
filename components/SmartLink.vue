@@ -3,7 +3,6 @@
   <a ref="shower" class="preview-box" @click="goToHash(target)">
 <slot></slot>
   </a>
-    <!--<div style="hide" ref="targetList" class="preview-box" @click="goToHash(target)"></div>-->
   </span>
 </template>
 

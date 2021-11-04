@@ -1,9 +1,9 @@
 <template>
   <figure :title="title" :id="id" :index="index">
-    <img :src="src" :alt="title ? title : 'Figure'+index" />
+  <slot name="img"></slot>
     <figcaption :index="index" :title="title" holder="Figure">
       <span v-if="title" class="caption-title">{{ title }}</span>
-      <slot/>
+      <slot></slot>
     </figcaption>
   </figure>
 </template>

@@ -2,10 +2,11 @@
   "private": true,
   "scripts": {
     "dev": "nuxt dev",
+    "build_node": "nuxt build",
+    "start_node": "node server.mjs",
     "build": "nuxt build",
-    "start": "node server.mjs",
-    "start_bak": "node .output/server/index.mjs",
-    "deploy": "nuxt build;node .output/server/index.mjs"
+    "start": "node .output/server/index.mjs",
+    "deploy": "export NITRO_PRESET=server;nuxt build;export NUXT_PORT=80;node .output/server/index.mjs"
   },
   "devDependencies": {
     "@popperjs/core": "^2.10.2",

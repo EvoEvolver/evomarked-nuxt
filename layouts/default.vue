@@ -1,5 +1,6 @@
 <template>
-  <Head lang="en-US">
+  <article>
+    <Head lang="en-US">
     <Link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css"
@@ -7,7 +8,6 @@
       crossorigin="anonymous"
     />
   </Head>
-  <article>
     <slot></slot>
   </article>
 </template>

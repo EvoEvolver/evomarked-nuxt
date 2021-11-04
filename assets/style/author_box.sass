@@ -12,17 +12,11 @@
     margin: auto
     text-align: center
 
-.author-entry::before
-    content: " "
+.author-entry::after
+    content: ", "
 
-.author-entry:last-child::before
-    content: "and "
-
-.author-entry:first-child::before
+.author-entry:last-child::after
     content: ""
 
-.author-sup-link::after
-    content: ","
 
-.author-sup-link:last-child::after
-    content: ""
+    

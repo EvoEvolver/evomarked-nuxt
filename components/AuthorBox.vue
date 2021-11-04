@@ -4,23 +4,11 @@
       <span class="author-entry" v-for="(author, index) of authorList" :key="index">
         {{ author.givenName + " " + author.familyName }}
         <sup v-if="author.affil || author.note">
-          <!--
-          <a
-            v-for="(affil, index) of author.affil"
-            :key="index"
-            class="author-sup-link"
-            :href="'#affil-def-' + affil"
-          >
-         
-            {{ affilIndices[affil] }}</a
-          >
-          -->
           <HoverTip
             v-for="(affil, index) of author.affil"
             :key="index"
-            :href="'#affil-def-' + affil"
           >
-            <a class="author-sup-link" :href="'#affil-def-' + affil" >{{ affilIndices[affil]}}{{" "}} </a>
+            <a class="author-sup-link" :href="'#affil-def-' + affil" >{{ affilIndices[affil]}}{{(index==author.affil.length-1)?"":","}}</a>
             <template v-slot:tip> {{affilDict[affil]}}</template>
           </HoverTip>
           <a

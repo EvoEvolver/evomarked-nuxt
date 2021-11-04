@@ -1,4 +1,5 @@
 <template>
+<h1>Reference</h1>
   <div class="reference-list">
     <p
       v-for="(refInfo, index) of referenceInfo"
@@ -14,7 +15,7 @@
           <a
             :href="'https://scholar.google.com/scholar?hl=en&q=' + authorName[0] + ' ' + authorName[1]"
             target="_blank"
-          >(Google ta)</a>
+          >(Google Ta!)</a>
         </template>
       </HoverTip>
       {{ refInfo.title + " " + refInfo.publish }}

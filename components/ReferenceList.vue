@@ -1,5 +1,5 @@
 <template>
-<h1>Reference</h1>
+  <h1>Reference</h1>
   <div class="reference-list">
     <p
       v-for="(refInfo, index) of referenceInfo"
@@ -72,6 +72,7 @@ export default {
       let refInfoList = []
       for (let key of this.citedKeys) {
         let entry = this.getEntry(key);
+        if (!entry) continue
         let refInfo = {
           author: getAuthorList(entry.author),
           title: entry.title,

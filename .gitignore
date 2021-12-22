@@ -1,8 +1,4 @@
-node_modules
-*.log
+pages/*
+public/page_assets/*
 .nuxt
-nuxt.d.ts
-.output
-
-pages
-page_assets
+node_modules

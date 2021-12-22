@@ -1,20 +1,8 @@
 {
-  "private": true,
-  "scripts": {
-    "dev": "nuxt dev",
-    "build_node": "nuxt build",
-    "start_node": "node server.mjs",
-    "build": "nuxt build",
-    "start": "node .output/server/index.mjs",
-    "deploy": "export NITRO_PRESET=server;nuxt build;export NUXT_PORT=80;node .output/server/index.mjs"
-  },
-  "devDependencies": {
-    "@popperjs/core": "^2.10.2",
-    "nuxt3": "latest",
-    "sass": "^1.42.1"
-  },
+  "name": "evomarked-nuxt",
+  "version": "0.0.1",
+  "main": "./nuxt.config.js",
   "dependencies": {
-    "http": "^0.0.1-security",
     "katex": "^0.13.18",
     "tippy.js": "^6.3.3"
   }

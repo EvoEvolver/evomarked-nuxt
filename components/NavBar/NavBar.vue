@@ -8,7 +8,7 @@
                             <img class="navicon" src="assets/icons/chapters-svgrepo-com.svg" />
                         </template>
                         <template v-slot:content>
-                            <NavBarContentTable :pageInfoList="pageInfoList"></NavBarContentTable>
+                           <NavBarContentTable :pageInfoList="pageInfoList" /> 
                         </template>
                     </NavBarDropdown>
                 </span>
@@ -78,6 +78,7 @@ onMounted(() => {
         }
         prevScrollpos = currentScrollPos;
     }
+   
 })
 
 </script>
@@ -89,6 +90,7 @@ onMounted(() => {
     top: 0; /* Stay on top */
     width: 100%; /* Full width */
     transition: top 0.3s; /* Transition effect when sliding down (and up) */
+    z-index: 10;
 }
 
 /* Style the navbar links */

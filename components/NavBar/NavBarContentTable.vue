@@ -2,7 +2,7 @@
     <div v-if="pageInfoList" class="nav-content-table">
         <ul>
             <li v-for="(item, key) of pageInfoList" :key="key">
-                <a :href="'/' + mapUrl(item[0])">{{ item[1].title || item[0] }}</a>
+                <a :href="'/' + mapUrl(item[0])">{{ item[1]?.title || item[0] }}</a>
             </li>
         </ul>
     </div>

@@ -5,7 +5,9 @@
                 <span>
                     <NavBarDropdown>
                         <template v-slot:title>
-                            <img class="navicon" src="assets/icons/chapters-svgrepo-com.svg" />
+                            <img class="navicon" src="assets/icons/chapters-svgrepo-com.svg" 
+                            alt="chapters"
+                            />
                         </template>
                         <template v-slot:content>
                            <NavBarContentTable :pageInfoList="pageInfoList" /> 
@@ -15,7 +17,7 @@
 
                 <span class="navbar-item">
                     <a href="/">
-                        <img class="navicon" src="assets/icons/home-svgrepo-com.svg" />
+                        <img class="navicon" src="assets/icons/home-svgrepo-com.svg" alt="homepage"/>
                     </a>
                 </span>
 
@@ -29,6 +31,7 @@
                             class="navicon"
                             src="assets/icons/chat-svgrepo-com.svg"
                             style="fill: white;"
+                            alt="chat"
                         />
                     </a>
                 </span>
@@ -38,6 +41,7 @@
                             class="navicon"
                             src="assets/icons/git-icon-white.svg"
                             style="fill: white;"
+                            alt="git"
                         />
                     </a>
                 </span>

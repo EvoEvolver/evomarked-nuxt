@@ -1,10 +1,15 @@
 <template>
-<span>
-</span>
+<!--
+<span style="position:absolute; left:0rem;margin-top:-1rem;">
+<div v-show="showScript" class="script-box">
+{{ text }}
+</div>
+</span>-->
+<span></span>
 </template>
 
 <script setup>
-import { onMounted, inject } from 'vue'
+import { onMounted, inject, watch } from 'vue'
 
 const props = defineProps({
     text: {
@@ -12,29 +17,45 @@ const props = defineProps({
     }
 })
 
-
-const newestContent = inject("newestContent")
 const speechCenter = inject("speechCenter")
-const waitForFinish = inject("waitForFinish")
-const playFinished = inject("playFinished")
 
+const speechContents = inject("speechContents")
+
+const playingList = inject("playingList")
+let playingListId = -1
+
+const addExtraController = inject("addExtraController")
 
 onMounted(() => {
-    waitForFinish.value = true
+    speechContents.push(props.text)
+    playingListId = playingList.push(false)
+    addExtraController({
+        type : "finiteEndure",
+        play: play,
+        finishPlay: finishPlay,
+        script: props.text
+    })
 })
 
 
-watch(() => newestContent.value || false, (val, oldVal) => {
-    if (val) {
-        playFinished.value = false
-        speechCenter.value.speak(props.text, playFinished)
-    }else{
-        playFinished.value = true
-        speechCenter.value.cancel()
-    }
-});
+function play(){
+    playingList[playingListId] = true
+    speechCenter.value.speak(props.text, playingList, playingListId)
+}
+
+function finishPlay(){
+    playingList[playingListId] = false
+    speechCenter.value.cancel()
+}
+
+
+
 
 </script>
 
 <style>
+.voice-box{
+    height: 0.1rem;
+}
+
 </style>

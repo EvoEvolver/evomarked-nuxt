@@ -17,7 +17,7 @@
     padding: 0.6rem
     padding-left: 0.5rem
     padding-right: 0.5rem
-    width: 100%
+    width: 98%
     box-shadow: 0 0 10px 10px #88888830
 
 %block-title
@@ -72,9 +72,7 @@
 .remark-box
     @extend %block
     background-color: $block-backgroud
-    &::before
-        content: attr(name) " " attr(index) " "
-        font-weight: bold
+        
 
 .remark-title
     @extend %block-title
@@ -114,13 +112,6 @@ table
     margin: auto
     border-collapse: collapse
 
-th
-    text-align: center
-    border: 1px solid black
-    
-td
-    text-align: center
-    border: 1px solid black
 
 .cite-def
     a
@@ -130,4 +121,13 @@ td
 .bare-image
     display: block
     margin: auto
+    max-height: 30rem
     
+.layout-table
+    td
+        border: 0px
+
+.slide-default
+    %block
+        width: 90%
+        box-shadow: 0 0 4px 4px #88888830

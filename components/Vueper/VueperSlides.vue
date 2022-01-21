@@ -152,7 +152,7 @@ SOFTWARE.-->
       <div style="position: absolute; bottom: 0.1rem; z-index: 3; width: 100%;">
           <slot name="bottom"></slot>
       </div>
-      <div style="position: absolute; top: 0.4rem; z-index: 3; width: 100%;">
+      <div style="position: absolute; top: 0.35rem; z-index: 3; width: 100%;">
           <slot name="top"></slot>
       </div>
       <div

@@ -1,14 +1,16 @@
 <template>
-    <div>Text: {{ spokenText }}</div>
+    <div><!--{{ spokenText }}--></div>
 </template>
 <script>
 
 export default {
+    inject: ["slidesSettings"],
+    props:{
+        voiceLang: {}
+    },
     data() {
         return {
-            voiceName: "Microsoft Guy Online (Natural) - English (United States)",
             voices: [],
-            voice: null,
             spokenText: "",
             muted: false
         }
@@ -16,28 +18,40 @@ export default {
     mounted() {
         getVoices().then((_voices) => {
             this.voices = _voices
-            this.voice = selectVoice(_voices, this.voiceName)
         });
     },
+    computed:{
+        voice(){
+            let _voice = selectVoice(this.voices, this.slidesSettings.value.voiceStyleName)
+            if(!_voice){
+                _voice = selectVoiceByLang(this.voices, this.voiceLang)
+                this.slidesSettings.value.voiceStyleName = _voice.name
+                return _voice
+            }else{
+                return _voice
+            }
+        }
+    },
     methods: {
-        speak(text, playFinished) {
+        speak(text, playingList, playingListId) {
             this.spokenText = text
             if (this.muted) {
-                setTimeout(() => { playFinished.value = true }, text.length*20)
+                setTimeout(() => { playingList[playingListId] = false }, text.length * 20)
                 return
             }
             let utterThis = new SpeechSynthesisUtterance(text);
-            if (playFinished) {
+            if (playingList) {
                 utterThis.onend = function (event) {
-                    playFinished.value = true
+                    playingList[playingListId] = false
                 }
             }
             utterThis.onerror = function (event) {
-                console.error('SpeechSynthesisUtterance.onerror');
+                console.error('SpeechSynthesisUtterance.onerror'+String(event));
             }
             utterThis.voice = this.voice
-            utterThis.rate = 1.2
-            utterThis.pitch = 1
+            utterThis.rate = 0.5+1*0.01*this.slidesSettings.value.voiceSpeed
+            utterThis.pitch = 2*0.01*this.slidesSettings.value.voicePitch
+            console.log(utterThis.pitch)
             window.speechSynthesis.speak(utterThis);
         },
         cancel() {
@@ -45,9 +59,8 @@ export default {
         },
         setMuted(muted) {
             this.muted = muted
-        }
+        },
     }
-
 }
 // from https://stackoverflow.com/questions/49506716/speechsynthesis-getvoices-returns-empty-array-on-windows
 
@@ -61,7 +74,7 @@ function getVoices() {
                     resolve(synth.getVoices());
                     clearInterval(id);
                 }
-            }, 10);
+            }, 20);
         }
     )
 }
@@ -72,5 +85,10 @@ function selectVoice(voices, voiceName) {
             return v
         }
     }
+    return null
+}
+import {getGoodVoice} from "./voiceStyleHelper"
+function selectVoiceByLang(voices, voiceLang){
+    return getGoodVoice(voices, voiceLang)
 }
 </script>

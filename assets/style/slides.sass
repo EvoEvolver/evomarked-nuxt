@@ -7,26 +7,38 @@
     left: 50%
     transform: translate(-50%,-50%)
     background-color: white
-    
 
     h1
         font-size: 3rem
     h2,h3
         font-size: 2.5rem
-    li,p
-        font-size: 2rem
+    li,p,span
+        font-size: 1.5rem
+        margin-top: 0.3rem
+        margin-bottom: 0.3rem
     .katex
-        font-size: 2em !important
-
+        font-size: 1.7em !important
+    .minor-text
+        p,span
+            font-size: 1.2rem
 
 :fullscreen .slide-default
-
 
     h1
         font-size: 3.5rem
     h2,h3
         font-size: 3rem
-    li,p
-        font-size: 2.5rem
+    li,p,span
+        font-size: 2rem
+
     .katex
-        font-size: 2.5em !important
+        font-size: 2.3em !important
+    .minor-text
+        p,span
+            font-size: 1.5rem
+            margin: 0.5rem
+
+.slide-default
+    .remark-box
+        .katex
+            font-size: 1.5em !important

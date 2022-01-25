@@ -2,7 +2,7 @@
     <div
         style="margin-left:-5rem;margin-right:-5rem;margin-top:2rem;position:relative;"
         ref="slidesbox"
-        :id = "id"
+        :id="id"
     >
         <VueperSlides
             ref="slidesComp"
@@ -165,7 +165,7 @@ const props = defineProps({
     voiceLang: {
         default: "English"
     },
-    id:{}
+    id: {}
 })
 
 // Slide Settings
@@ -344,64 +344,59 @@ function toggleShowScript() {
 
 
 </script>
-<style>
-.vueperslides__arrow {
-    color: rgb(0, 0, 0);
-}
-.vueperslides__bullet .default {
-    background-color: rgba(0, 0, 0, 0.404);
-    border: none;
-    box-shadow: none;
-    transition: 0.3s;
-    width: 16px;
-    height: 16px;
-}
-.vueperslides__bullet--active .default {
-    background-color: rgba(0, 0, 0, 0.842);
-}
-.vueperslides__progress {
-    background: rgba(0, 0, 0, 0.25);
-    color: rgba(0, 0, 0, 0.904);
-}
-.upper-bar {
-    height: 1rem;
-    width: 100%;
-    background-color: black;
-}
-.clickable-icon {
-    height: 1.5rem;
-    padding: 0px;
-    margin-bottom: -0.1rem;
-    margin-left: 0.2rem;
-}
-.clickable-icon:hover {
-    background-color: rgba(128, 128, 128, 0.712);
-}
-.keyboard-control-button {
-    padding: 0;
-    background-color: white;
-    margin: 0 0.2rem;
-    border: 0;
-}
-.keyboard-control-button:focus {
-    background-color: rgba(128, 128, 128, 0.493);
-}
-.speechCenter {
-    text-align: center;
-    margin: auto;
-    margin-top: 1rem;
-    width: 90%;
-    background-color: rgba(128, 128, 128, 0.3);
-}
-:fullscreen .speechCente {
-    position: absolute;
-    top: -6rem;
-    left: 15%;
-    width: 70%;
-    z-index: 10;
-}
-.content-upper-bar {
-    background-color: rgba(128, 128, 128, 0.466);
-    height: 1.7rem;
-}
+<style src="./slides.sass"></style>
+<style lang="sass">
+
+.vueperslides__arrow
+    color: rgb(0, 0, 0)
+
+.vueperslides__bullet .default
+    background-color: rgba(0, 0, 0, 0.404)
+    border: none
+    box-shadow: none
+    transition: 0.3s
+    width: 16px
+    height: 16px
+
+.vueperslides__bullet--active .default
+    background-color: rgba(0, 0, 0, 0.842)
+
+.vueperslides__progress
+    background: rgba(0, 0, 0, 0.25)
+    color: rgba(0, 0, 0, 0.904)
+
+.upper-bar
+    height: 1rem
+    width: 100%
+    background-color: black
+
+.clickable-icon
+    height: 1.5rem
+    padding: 0px
+    margin-bottom: -0.1rem
+    margin-left: 0.2rem
+
+    &:hover
+        background-color: rgba(128, 128, 128, 0.712)
+
+.keyboard-control-button
+    padding: 0
+    background-color: white
+    margin: 0 0.2rem
+    border: 0
+
+    &:focus
+        background-color: rgba(128, 128, 128, 0.493)
+
+.speechCenter
+    text-align: center
+    margin: auto
+    margin-top: 1rem
+    width: 90%
+    background-color: rgba(128, 128, 128, 0.3)
+
+.content-upper-bar
+    background-color: rgba(128, 128, 128, 0.466)
+    height: 1.7rem
+
 </style>

@@ -1,0 +1,42 @@
+@import "./vars"
+
+.tippy-content
+    > div
+        > div, figure
+            width: 97%
+            border: none
+            box-shadow: none
+            background-color: none
+
+.warning, .parse_warning
+    @extend %block
+    background-color: $warning-color
+    text-align: center
+    color: white
+    &::before
+        content: 'Warning:'
+
+.box-quote
+    @extend %block
+    border: 3px solid gray
+
+.proof-box
+    @extend %block
+    &::before
+        display: block
+        content: "Proof"
+        font-weight: bold
+    &::after
+        display: block
+        text-align: right
+        content: "❏"
+
+.layout-table
+    width: 90%
+    margin: auto
+    border-collapse: collapse
+
+.bare-image
+    display: block
+    margin: auto
+    max-height: 30rem

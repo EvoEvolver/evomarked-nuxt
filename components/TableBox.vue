@@ -54,4 +54,5 @@ export default {
 <style lang="sass" scoped>
 .left
     text-align: left
+
 </style>

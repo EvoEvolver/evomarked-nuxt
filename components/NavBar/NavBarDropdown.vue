@@ -4,8 +4,10 @@
             interactive="true"
             placement="bottom-end"
             theme="material"
-            :options="{ arrow: false,
-            offset: [0,2] }"
+            :options="{
+                arrow: false,
+                offset: [0, 2]
+            }"
         >
             <span class="navbar-item">
                 <slot name="title"></slot>
@@ -17,12 +19,11 @@
     </div>
 </template>
 
-<style scoped>
-.navbar-item {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 0.8rem;
-    text-decoration: none;
-}
+<style lang="sass" scoped>
+.navbar-item
+    display: block
+    color: white
+    text-align: center
+    padding: 0.8rem
+    text-decoration: none
 </style>

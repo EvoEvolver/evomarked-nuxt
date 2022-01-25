@@ -3,7 +3,7 @@
         <span class="credit-start" @mouseenter="()=>{showRange=true}" @mouseleave="()=>{showRange=false}">
             <hover-tip :interactive="true">
                 <span :id="'credit-info-' + id">
-                    <img class="inline-icon" src="assets/icons/info-svgrepo-com.svg" />
+                    <img class="inline-icon" src="../Icons/info.svg" />
                 </span>
                 <template v-slot:tip>
                     <CreditTip :info="pageEnv.creditInfo[id]"></CreditTip>
@@ -12,7 +12,7 @@
         </span>
         <slot></slot>
         <span class="credit-end" :id="'credit-end-' + id" @click="goToHash('credit-info-' + id)">
-            <img class="inline-icon" src="assets/icons/arrow-from-bottom-svgrepo-com.svg" />
+            <img class="inline-icon" src="../Icons/arrow-from-bottom.svg" />
         </span>
     </div>
 </template>

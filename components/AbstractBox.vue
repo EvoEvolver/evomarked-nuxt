@@ -23,5 +23,19 @@ export default {
 };
 </script>
 
-<style>
+<style lang="sass">
+@import "./Layout/vars.sass"
+
+.abstract
+    @extend %block
+    text-align: left
+    p
+        margin: 0
+        margin-bottom: 0.2rem
+        hyphens: auto
+
+    &>:first-child::before
+        content: 'Abstract: '
+        font-weight: bold
+
 </style>

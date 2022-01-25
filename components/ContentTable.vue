@@ -1,6 +1,6 @@
 <template>
   <div class="content-table">
-    <content-table-nested :contentList="contentList"> </content-table-nested>
+    <content-table-nested :contentList="contentList"></content-table-nested>
   </div>
 </template>
 
@@ -62,5 +62,13 @@ export default {
 };
 </script>
 
-<style>
+<style lang="sass">
+@import "./Layout/vars"
+
+.content-table
+  @extend %block
+  & ul
+    margin: auto
+    list-style-type: none
+
 </style>

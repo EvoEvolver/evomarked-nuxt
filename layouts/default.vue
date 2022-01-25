@@ -8,15 +8,9 @@
         crossorigin="anonymous"
       />
     </Head>
-    <div><slot></slot></div>
+    <LayoutDefault><slot></slot></LayoutDefault>
   </Html>
 </template>
 
 <script>
-export default {
-  props: ["name"]
-};
 </script>
-
-<style lang="sass" src="../assets/style/evomark.sass">
-</style>

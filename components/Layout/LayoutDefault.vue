@@ -1,15 +1,19 @@
-@import "./vars"
+<template>
+    <slot></slot>
+</template>
 
-header
-    //position: fixed
-    color: white
-    background-color: rgb(12, 84, 156)
-    padding: 0.7rem
-    width: 100%
+<style src="./block.sass" lang="sass"></style>
+<style src="./inline.sass" lang="sass"></style>
+
+<style lang="sass">
+
+@import "./vars"
 
 body
     margin: 0px
     padding: 0px
+    -webkit-print-color-adjust: exact !important
+
 article
     margin: auto
     max-width: 50rem
@@ -24,6 +28,7 @@ article
 
 .title
     font-size: 2rem
+
 a
     text-decoration: none
     color: $link-color
@@ -42,3 +47,16 @@ h2
 h3, h4, h5, h6
     margin: 1rem
     text-align: center
+
+.katex
+    font-size: 1em !important
+
+.divider
+    text-align: center
+    font-size: 1.7em
+    margin: auto
+    display: block
+    &::before
+        content: "* * *"
+
+</style>

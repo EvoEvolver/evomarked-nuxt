@@ -16,8 +16,8 @@
   </HoverTip>]
 </template>
 <script>
-import HoverTip from "./HoverTip.vue";
-import SmartLink from "./SmartLink.vue";
+import HoverTip from "../HoverTip.vue";
+import SmartLink from "../SmartLink.vue";
 export default {
   methods: {},
   inject: ["pageEnv"],
@@ -89,5 +89,18 @@ export default {
 };
 </script>
 
-<style>
+<style lang="sass">
+  
+.cite-link::before
+    content: ","
+    
+.cite-link:first-child::before
+    content: ""
+
+.cite-links
+  &::before
+      content: "["
+  &::after
+      content: "]"
+
 </style>

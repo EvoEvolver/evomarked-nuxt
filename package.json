@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "main": "./nuxt.config.js",
   "dependencies": {
+    "highlight.js": "^11.4.0",
     "katex": "^0.13.18",
     "tippy.js": "^6.3.3"
   }

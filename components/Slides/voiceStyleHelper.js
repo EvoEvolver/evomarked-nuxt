@@ -50,7 +50,9 @@ export function filteredVoices(voices, voiceLang) {
 }
 
 let goodVoiceDict = {
-    "english": ["Microsoft Guy Online (Natural) - English (United States)","Google US English","Microsoft Zira Desktop - English (United States)"]
+    "english": ["Microsoft Guy Online (Natural) - English (United States)","Google US English","Microsoft Zira Desktop - English (United States)"],
+    "chinese": ["Microsoft Xiaoxiao Online (Natural) - Chinese (Mainland)"],
+    "japanese": ["Microsoft Nanami Online (Natural) - Japanese (Japan)"]
 }
 
 export function getGoodVoice(_voices, voiceLang){

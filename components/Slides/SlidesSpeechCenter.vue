@@ -6,7 +6,9 @@
 export default {
     inject: ["slidesSettings"],
     props:{
-        voiceLang: {}
+        voiceLang: {
+            default:"English"
+        }
     },
     data() {
         return {

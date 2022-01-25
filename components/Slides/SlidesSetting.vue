@@ -11,7 +11,6 @@
         <div>Voice pitch: <input type="range" min="1" max="100" v-model="slidesSettings.voicePitch" class="slider"> {{slidesSettings.voicePitch}}</div>
         <!--<div>Autoplay speed: <input type="range" min="1" max="100" v-model="slidesSettings.autoPlaySpeed" class="slider"></div>
         {{slidesSettings}} -->
-        
         {{slidesSettings}}
 
     </div>

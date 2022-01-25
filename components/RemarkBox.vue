@@ -1,5 +1,5 @@
 <template>
-  <div class="remark-box">
+  <div class="remark-box" :id="id">
     <span v-if="!hideHead">
       <span style="font-weight: bold">{{ name }} {{ index }}</span>
       <span v-if="title" class="remark-title">{{ title }}</span>

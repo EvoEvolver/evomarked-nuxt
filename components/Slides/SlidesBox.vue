@@ -2,6 +2,7 @@
     <div
         style="margin-left:-5rem;margin-right:-5rem;margin-top:2rem;position:relative;"
         ref="slidesbox"
+        :id = "id"
     >
         <VueperSlides
             ref="slidesComp"
@@ -163,7 +164,8 @@ import { defaultVoiceStyle } from './voiceStyleHelper'
 const props = defineProps({
     voiceLang: {
         default: "English"
-    }
+    },
+    id:{}
 })
 
 // Slide Settings

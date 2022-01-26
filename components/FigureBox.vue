@@ -1,5 +1,5 @@
 <template>
-  <RemarkBox name="Figure" :title="title" :id="id" :index="index" :hideHead="true">
+  <RemarkBox type="Figure" :title="title" :id="id" :index="index" :hideHead="true">
     <div style class="figure-box">
       <slot name="img"></slot>
     </div>

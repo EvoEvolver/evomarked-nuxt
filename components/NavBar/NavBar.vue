@@ -5,45 +5,50 @@
                 <span>
                     <NavBarDropdown>
                         <template v-slot:title>
-                            <img class="navicon" src="./chapters.svg" 
-                            alt="chapters"
-                            />
+                            <img class="navicon" src="./chapters.svg" alt="chapters" />
                         </template>
                         <template v-slot:content>
-                           <NavBarContentTable :pageInfoList="pageInfoList" /> 
+                            <NavBarContentTable :pageInfoList="pageInfoList" />
                         </template>
                     </NavBarDropdown>
                 </span>
 
-                <span class="navbar-item">
-                    <a href="/">
-                        <img class="navicon" src="./home.svg" alt="homepage"/>
-                    </a>
-                </span>
+                <a href="/" class="navbar-item">
+                    <img class="navicon" src="./home.svg" alt="homepage" />
+                </a>
 
                 <span class="navbar-title">{{ pageEnv.title }}</span>
             </span>
 
             <span class="navbar-right">
-                <span v-if="pageEnv.chatUrl" class="navbar-item">
-                    <a :href="pageEnv.chatUrl" target="_blank">
-                        <img
-                            class="navicon"
-                            src="./chat.svg"
-                            style="fill: white;"
-                            alt="chat"
-                        />
-                    </a>
-                </span>
-                <span v-if="pageEnv.gitRepoUrl" class="navbar-item">
-                    <a :href="pageEnv.gitRepoUrl" target="_blank">
-                        <img
-                            class="navicon"
-                            src="./git.svg"
-                            style="fill: white;"
-                            alt="git"
-                        />
-                    </a>
+                <a
+                    v-if="pageEnv.chatUrl"
+                    class="navbar-item"
+                    :href="pageEnv.chatUrl"
+                    target="_blank"
+                >
+                    <img class="navicon" src="./chat.svg" style="fill: white;" alt="chat" />
+                </a>
+                <a
+                    v-if="pageEnv.gitRepoUrl"
+                    class="navbar-item"
+                    :href="pageEnv.gitRepoUrl"
+                    target="_blank"
+                >
+                    <img class="navicon" src="./git.svg" style="fill: white;" alt="git" />
+                </a>
+                <span class="navbar-item">
+                    <FullScreenPanel>
+                        <CreditManifest></CreditManifest>
+                        <template v-slot:icon>
+                            <img
+                                class="navicon"
+                                src="../Icons/info-white.svg"
+                                style="fill: white;"
+                                alt="info"
+                            />
+                        </template>
+                    </FullScreenPanel>
                 </span>
             </span>
         </div>
@@ -72,66 +77,68 @@ const pageInfoList = computed(() => {
     return pageList
 })
 onMounted(() => {
-    var prevScrollpos = window.pageYOffset;
+    let prevScrollpos = window.pageYOffset;
     window.onscroll = function () {
-        var currentScrollPos = window.pageYOffset;
-        if (prevScrollpos > currentScrollPos) {
+        let currentScrollPos = window.pageYOffset;
+        if (prevScrollpos > currentScrollPos || currentScrollPos == 0) {
             document.getElementById("navbar").style.top = "0";
         } else {
             document.getElementById("navbar").style.top = "-60px";
         }
         prevScrollpos = currentScrollPos;
     }
-   
+
 })
 
 </script>
 
-<style scoped>
-#navbar {
-    background-color: rgb(37, 37, 37); /* Black background color */
-    position: fixed; /* Make it stick/fixed */
-    top: 0; /* Stay on top */
-    width: 100%; /* Full width */
-    transition: top 0.3s; /* Transition effect when sliding down (and up) */
-    z-index: 10;
-}
+<style lang="sass" scoped>
+
+@import "../Layout/vars"
+
+#navbar
+    background-color: rgb(37, 37, 37) // Black background color */
+    position: fixed //Make it stick/fixed */
+    top: 0 // Stay on top
+    width: 100% // Full width */
+    transition: top 0.3s // Transition effect when sliding down (and up) */
+    z-index: 10
 
 /* Style the navbar links */
-.navbar-item {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 0.8rem;
-    text-decoration: none;
-}
+.navbar-item
+    display: block
+    color: white
+    text-align: center
+    padding: 0.8rem
+    text-decoration: none
 
-.navbar-left span {
-    float: left;
-}
+.navbar-left > span
+    float: left
+.navbar-left > a
+    float: left
+.navbar-right > a
+    float: right
+.navbar-right > span
+    float: right
 
-.navbar-right span {
-    float: right;
-}
-.navicon {
-    display: inline;
-    height: 1.5rem;
-    pedding: 0px;
-}
-.navbar-item:hover {
-    background-color: rgb(167, 167, 167);
-    color: black;
-}
-.navbar-title {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 0.8rem;
-    text-decoration: none;
-}
-@media (max-width: 600px) {
-    .navbar-title {
-        display: none;
-    }
-}
+.navicon
+    display: inline
+    height: 1.5rem
+    pedding: 0px
+
+.navbar-item:hover
+    background-color: $focus-color
+    color: black
+
+.navbar-title
+    display: block
+    color: white
+    text-align: center
+    padding: 0.8rem
+    text-decoration: none
+
+@media (max-width: 600px)
+    .navbar-title
+        display: none
+
 </style>

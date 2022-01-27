@@ -2,8 +2,20 @@
     <slot></slot>
 </template>
 
-<style src="./block.sass" lang="sass"></style>
-<style src="./inline.sass" lang="sass"></style>
+<script setup>
+import { provide } from "vue"
+import katex from "katex/dist/katex.mjs";
+provide('katexAPI', katex);
+const reactiveEnv = ref({});
+provide('reactiveEnv',reactiveEnv);
+</script>
+
+<style src="./block.sass" lang="sass">
+
+</style>
+<style src="./inline.sass" lang="sass">
+
+</style>
 
 <style lang="sass">
 
@@ -17,12 +29,11 @@ body
 article
     margin: auto
     max-width: 50rem
-    //border: 3px solid gray
     padding-right: 2rem
     padding-left: 2rem
-    //padding-top: 2rem
+    padding-top: 1.5rem
     padding-bottom: 20rem
-
+    
     font-family: "Times New Roman", Times, serif
     font-size: 1.2rem
 
@@ -58,5 +69,6 @@ h3, h4, h5, h6
     display: block
     &::before
         content: "* * *"
+
 
 </style>

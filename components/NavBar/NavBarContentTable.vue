@@ -1,20 +1,16 @@
 <template>
     <div v-if="pageInfoList" class="nav-content-table">
         <ul>
-            <li v-for="(item, key) of pageInfoList" :key="key">
-                <a :href="'/' + mapUrl(item[0])">{{ item[1]?.title || item[0] }}</a>
-            </li>
+            <template v-for="(item, key) of pageInfoList" :key="key">
+                <li v-if="item[0]!='index'">
+                    <a :href="'/' + item[0]">{{ item[1]?.title || item[0] }}</a>
+                </li>
+            </template>
         </ul>
     </div>
 </template>
 <script setup>
 const props = defineProps(["pageInfoList"])
-function mapUrl(url) {
-    if (url == "index")
-        return ""
-    else
-        return url
-}
 </script>
 <style lang="sass" scoped>
 
@@ -24,5 +20,4 @@ function mapUrl(url) {
 
 .nav-content-table li
     margin: 0.3rem
-    
 </style>

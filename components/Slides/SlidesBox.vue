@@ -1,13 +1,10 @@
 <template>
-    <div
-        style="margin-left:-5rem;margin-right:-5rem;margin-top:2rem;position:relative;"
-        ref="slidesbox"
-        :id="id"
-    >
+    <div ref="slidesBox" class="slides-box-root">
+        <div :id="id"></div>
         <VueperSlides
             ref="slidesComp"
             :infinite="false"
-            :slideRatio="2 / 3"
+            :slideRatio="slideRatio"
             :fillParent="isSlidesFullScreen"
             :touchable="false"
             progress
@@ -44,6 +41,7 @@
                         <HoverTip>
                             <button class="keyboard-control-button" ref="keyboardControlButton">
                                 <img
+                                    v-if="!isSmallScreen"
                                     style="height: 1.5rem;padding: 0px;margin-left: 0.2rem;margin-right: 0.2rem;"
                                     src="./keyboard.svg"
                                     alt="keyboard"
@@ -52,7 +50,7 @@
                             <template v-slot:tip>
                                 <table style="width:8rem;">
                                     <tr>
-                                        <td colspan="2">Focus to operate</td>
+                                        <td colspan="2">Press to control</td>
                                     </tr>
                                     <tr>
                                         <td style="text-align:center;">→</td>
@@ -189,7 +187,7 @@ const slidesComp = ref(null)
 provide("slidesComp", slidesComp)
 const speechCenter = ref(null)
 provide("speechCenter", speechCenter)
-const slidesbox = ref(null)
+const slidesBox = ref(null)
 
 // Add keyboard listeners
 const keyboardControlButton = ref(null)
@@ -197,8 +195,9 @@ const keyboardControlButton = ref(null)
 onMounted(() => {
     keyboardControlButton.value.addEventListener('keyup', keyup)
     document.addEventListener('fullscreenchange', onFullscreenChange);
+    window.addEventListener('resize', onResize);
+    onResize()
     // TODO unmount the listeners when destroy
-
 })
 
 function keyup(e) {
@@ -267,22 +266,21 @@ function openFullscreen(elem) {
 const isSlidesFullScreen = ref(false)
 
 function makeSlidesFullScreen() {
-    openFullscreen(slidesbox.value)
+    openFullscreen(slidesBox.value)
 }
 
-//provide("makeSlidesFullScreen", makeSlidesFullScreen)
-const defaultSlideRatio = 2 / 3
-const slideRatio = ref(defaultSlideRatio)
+const _fixedDefaultSlideRatio = 3/4
+const defaultSlideRatio = ref(_fixedDefaultSlideRatio)
+const slideRatio = ref(defaultSlideRatio.value)
 
 // The ratio of the slides will be changed to the ratio of screen
 function onFullscreenChange() {
     if (document.fullscreenElement != null) {
         isSlidesFullScreen.value = true
         slideRatio.value = 1 / window.devicePixelRatio
-        console.log("slideRatio", slideRatio.value)
     } else {
         isSlidesFullScreen.value = false
-        slideRatio.value = defaultSlideRatio
+        slideRatio.value = defaultSlideRatio.value
     }
 }
 
@@ -295,6 +293,24 @@ watch(() => isSlidesFullScreen.value, (val, oldVal) => {
         window.removeEventListener('keyup', keyup)
     }
 })
+
+// Responsiveness
+
+const isSmallScreen = ref(false)
+
+function onResize() {
+    if (document.documentElement.clientWidth < 600) {
+        let ratio = (document.documentElement.clientHeight - 150) / document.documentElement.clientWidth
+        slideRatio.value = ratio
+        defaultSlideRatio.value = ratio
+        isSmallScreen.value = true
+    } else {
+        defaultSlideRatio.value = _fixedDefaultSlideRatio
+        if(!isSlidesFullScreen.value)
+            slideRatio.value = _fixedDefaultSlideRatio
+        isSmallScreen.value = false
+    }
+}
 
 // Autoplay
 
@@ -336,7 +352,7 @@ function toggleMute() {
         speechCenter.value.cancel()
 }
 // Show & Hide script
-const showScript = ref(true)
+const showScript = ref(false)
 provide("showScript", showScript)
 function toggleShowScript() {
     showScript.value = !showScript.value
@@ -344,7 +360,9 @@ function toggleShowScript() {
 
 
 </script>
-<style src="./slides.sass"></style>
+<style src="./slides.sass" lang="sass">
+
+</style>
 <style lang="sass">
 
 .vueperslides__arrow
@@ -398,5 +416,4 @@ function toggleShowScript() {
 .content-upper-bar
     background-color: rgba(128, 128, 128, 0.466)
     height: 1.7rem
-
 </style>

@@ -107,17 +107,17 @@ watch(() => currPlayIndex.value, (val, oldVal) => {
 
 // Script Box
 const showScript = inject("showScript")
-const scriptList = computed(()=>{
+const scriptList = computed(() => {
     let scriptList = []
     for (let item of slidesControls.value) {
         if (item?.extraController?.script) {
-            if(!scriptList[item.clkIn])
+            if (!scriptList[item.clkIn])
                 scriptList[item.clkIn] = []
-            if(!item.autoIn)
+            if (!item.autoIn)
                 scriptList[item.clkIn][0] = item.extraController.script
             else
                 scriptList[item.clkIn][item.autoIn] = item.extraController.script
-            
+
         }
     }
     return scriptList
@@ -125,32 +125,37 @@ const scriptList = computed(()=>{
 
 </script>
 
-<style scoped>
-.slide-content {
-    position: relative;
-    height: 99%;
-    background-color: white;
-}
-.content-control-bar {
-    position: absolute;
-    bottom: 0;
-    color: rgba(128, 128, 128, 0.774);
-    width: 98%;
-}
-.content-upper-bar {
-    font-size: 1.2rem;
-    position: absolute;
-    top: 0.4rem;
-    height: 1.7rem;
-    width: 100%;
-    background-color: rgba(128, 128, 128, 0.233);
-}
-.script-box{
-    padding: 0.1rem;
-    width: 100%;
-    position: absolute;
-    top:3rem;
-    text-align: center;
-    z-index: 20;
-}
+<style lang="sass" scoped>
+
+
+
+.slide-content
+    
+    position: relative
+    height: 99%
+    background-color: white
+    overflow-x: hidden
+    overflow-y: auto
+
+.content-control-bar
+    position: absolute
+    bottom: 0
+    color: rgba(128, 128, 128, 0.774)
+    width: 98%
+
+.content-upper-bar
+    font-size: 1.2rem
+    position: absolute
+    top: 0.4rem
+    height: 1.7rem
+    width: 100%
+    background-color: rgba(128, 128, 128, 0.233)
+
+.script-box
+    padding: 0.1rem
+    width: 100%
+    position: absolute
+    top: 3rem
+    text-align: center
+    z-index: 20
 </style>

@@ -1,12 +1,15 @@
 $warning-color: rgb(255, 64, 64)
 $link-color: #0084d1
 $block-backgroud: none
+$focus-color: rgb(167, 167, 167)
+
 
 $normal-font-size: 1rem
 $minor-font-size: 0.7rem
 
 $normal-figure-height-limit: 25rem
 
+$small-screen-width: 600px
 
 %block
     margin: auto
@@ -26,3 +29,21 @@ $normal-figure-height-limit: 25rem
     margin-left: 0.1rem
     margin-right: 0.1rem
     font-size: $normal-font-size
+
+%scroll-box
+    /* width */
+    ::-webkit-scrollbar
+        width: 7px
+        height: 5px
+
+    /* Track */
+    ::-webkit-scrollbar-track
+        background: #f1f1f1
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb
+        background: $focus-color
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover
+        background: #555

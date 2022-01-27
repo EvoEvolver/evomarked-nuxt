@@ -1,13 +1,14 @@
 <template>
     <div :id="id" class="code-box">
         <pre><code v-html="highlightedCode" :class="className"></code></pre>
-        <pre class="lang-tag" v-if="lang != 'plaintext'"><code>{{ lang }}</code></pre>
+        <pre class="lang-tag" v-if="lang != 'plaintext'"><code style="background-color:rgba(255, 255, 255, 0);">{{ lang }}</code></pre>
     </div>
 </template>
+
 <script setup>
 import 'highlight.js/styles/stackoverflow-light.css'
-import 'highlight.js/lib/common';
-import hljs from 'highlight.js/lib/core'
+import hljs from 'highlight.js/lib/common';
+
 const props = defineProps({
     code: {
         default: ""
@@ -61,14 +62,16 @@ function escapeHtml(value) {
 }
 </script>
 
-<style scoped>
-.lang-tag {
-    position: absolute;
-    right: 0.3rem;
-    bottom: -0.8rem;
-    color: rgba(0, 0, 0, 0.267);
-}
-.code-box {
-    position: relative;
-}
+<style lang="sass" scoped>
+@import "./Layout/vars"
+
+.lang-tag
+    position: absolute
+    right: 0.3rem
+    bottom: -0.8rem
+    color: rgba(0, 0, 0, 0.267)
+
+.code-box
+    @extend %scroll-box
+    position: relative
 </style>

@@ -4,18 +4,24 @@
     </span>
     <div class="panel-background" v-if="showPanel">
         <div class="panel-body">
-            <button class="close-button" @click="togglePanel()">x</button>
+            <button class="close-button" @click="togglePanel()">
+                <img src="./Icons/close.svg" style="width:100%" />
+            </button>
             <slot></slot>
         </div>
     </div>
 </template>
 <script setup>
+import { provide } from "vue"
 const showPanel = ref(false)
-function togglePanel(){
+function togglePanel() {
     showPanel.value = !showPanel.value
 }
+provide("togglePanel", togglePanel)
 </script>
 <style scoped lang="sass">
+
+@import "./Layout/vars"
 
 .panel-background
     position: fixed
@@ -23,24 +29,47 @@ function togglePanel(){
     left: 0
     height: 100vh
     width: 100vw
-    background-color: rgba(0, 0, 0, 0.418)
+    background-color: rgba(0, 0, 0, 0.4)
     z-index: 5
 
 $vertical-per: 20%
 $horizontal-per: 20%
+
 .panel-body
+    @extend %scroll-box
     position: absolute
-    top: $vertical-per
-    left: $horizontal-per
-    width: 100%-2*$horizontal-per
-    height: 100%-2*$vertical-per
     background-color: white
     border-radius: 0.4rem
     text-align: center
-    
+    overflow: scroll
+    overflow-x: hidden
+    overflow-y: auto
+
+@media (max-width: $small-screen-width)
+    .panel-body
+        top: $vertical-per
+        left: calc($horizontal-per/2)
+        width: 100%-calc(2*$horizontal-per/2)
+        height: 100%-2*$vertical-per
+
+@media (min-width: $small-screen-width)
+    .panel-body
+        top: $vertical-per
+        left: $horizontal-per
+        width: 100%-2*$horizontal-per
+        height: 100%-2*$vertical-per
+
 .close-button
     position: absolute
     top: 1rem
     right: 1rem
     background-color: white
+    border: 0
+    width: 2rem
+    height: 2rem
+    padding: 0
+
+.close-button:hover
+    background-color: $focus-color
+
 </style>

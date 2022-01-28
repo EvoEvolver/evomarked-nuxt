@@ -31,7 +31,7 @@ article
     max-width: 50rem
     
     padding-top: 1.5rem
-    padding-bottom: 20rem
+    padding-bottom: 5rem
     
     font-family: "Times New Roman", Times, serif
     font-size: 1.2rem

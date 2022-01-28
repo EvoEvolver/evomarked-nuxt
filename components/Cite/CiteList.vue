@@ -1,6 +1,6 @@
 <template>
-  <h1>Reference</h1>
-  <div class="reference-list">
+  <div class="reference-list" v-if="referenceInfo.length != 0">
+    <h1>Reference</h1>
     <p
       v-for="(refInfo, index) of referenceInfo"
       :key="index"
@@ -8,7 +8,7 @@
       class="cite-def"
     >
       {{ index + 1 }}.
-      <HoverTip v-for="(authorName,index) of refInfo.author" interactive="true">
+      <HoverTip v-for="(authorName, index) of refInfo.author" interactive="true">
         {{ authorName[2] + ",&nbsp;" }}
         <template v-slot:tip>
           {{ authorName[0] + " " + authorName[1] }}
@@ -125,8 +125,9 @@ function getDisplayName(authorStr) {
 </script>
 
 <style lang="sass">
+
 .cite-def
-    a
-        color: black
+  a
+    color: black
     margin: 0.5rem
 </style>

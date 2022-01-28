@@ -22,8 +22,4 @@ export default {
 .figure-box
   text-align: center
 
-  & > img
-    margin: auto
-    max-height: 25rem
-
 </style>

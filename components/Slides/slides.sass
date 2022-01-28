@@ -1,7 +1,5 @@
 @import "../Layout/vars"
 
-
-
 .slide-default
     width: 80%
     margin-top: 1rem
@@ -21,7 +19,7 @@
     .minor-text
         p,span
             font-size: 1.2rem
-    pre > code
+    .code-box> pre > code, .code-box span
         font-size: 1.1rem
 
 :fullscreen .slide-default
@@ -54,8 +52,6 @@
     //margin-right: -2rem
     margin-top: 2rem
     position: relative
-
-
 
 @media (max-width: $small-screen-width)
     .slide-default, :fullscreen .slide-default

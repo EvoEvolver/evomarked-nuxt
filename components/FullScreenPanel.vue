@@ -34,6 +34,7 @@ provide("togglePanel", togglePanel)
 
 $vertical-per: 20%
 $horizontal-per: 20%
+$horizontal-per-small-screen: 10%
 
 .panel-body
     @extend %scroll-box
@@ -48,8 +49,8 @@ $horizontal-per: 20%
 @media (max-width: $small-screen-width)
     .panel-body
         top: $vertical-per
-        left: calc($horizontal-per/2)
-        width: 100%-calc(2*$horizontal-per/2)
+        left: $horizontal-per-small-screen
+        width: 100%-2*$horizontal-per-small-screen
         height: 100%-2*$vertical-per
 
 @media (min-width: $small-screen-width)

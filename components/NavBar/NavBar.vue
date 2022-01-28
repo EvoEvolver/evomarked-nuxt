@@ -80,7 +80,7 @@ onMounted(() => {
     let prevScrollpos = window.pageYOffset;
     window.onscroll = function () {
         let currentScrollPos = window.pageYOffset;
-        if (prevScrollpos > currentScrollPos || currentScrollPos == 0) {
+        if (prevScrollpos > currentScrollPos || currentScrollPos < 10) {
             document.getElementById("navbar").style.top = "0";
         } else {
             document.getElementById("navbar").style.top = "-60px";
@@ -97,7 +97,7 @@ onMounted(() => {
 @import "../Layout/vars"
 
 #navbar
-    background-color: rgb(37, 37, 37) // Black background color */
+    background-color: $nav-bar-background-color // Black background color */
     position: fixed //Make it stick/fixed */
     top: 0 // Stay on top
     width: 100% // Full width */
@@ -137,7 +137,7 @@ onMounted(() => {
     padding: 0.8rem
     text-decoration: none
 
-@media (max-width: 600px)
+@media (max-width: $small-screen-width)
     .navbar-title
         display: none
 

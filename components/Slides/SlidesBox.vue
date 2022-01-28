@@ -300,7 +300,7 @@ const isSmallScreen = ref(false)
 
 function onResize() {
     if (document.documentElement.clientWidth < 600) {
-        let ratio = (document.documentElement.clientHeight - 150) / document.documentElement.clientWidth
+        let ratio = (document.documentElement.clientHeight - 100) / document.documentElement.clientWidth
         slideRatio.value = ratio
         defaultSlideRatio.value = ratio
         isSmallScreen.value = true

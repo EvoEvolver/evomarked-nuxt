@@ -17,7 +17,13 @@
         content: 'Warning:'
 
 .box-quote
-    @extend %block
+    margin: auto
+    border-radius: 0.3rem
+    margin-top: 1.2rem
+    margin-bottom: 1.2rem
+    padding: 0.6rem
+    padding-left: 0.7rem
+    padding-right: 0.5rem
     border: 3px solid gray
 
 .proof-box
@@ -36,13 +42,23 @@
     margin: auto
     border-collapse: collapse
 
-
-.bare-image
+%bare-image
     display: block
     margin: auto
-    
+
+.normal-image
+    @extend %bare-image
+    max-width: 25rem
+
+.wide-image
+    @extend %bare-image
+
+.narrow-image
+    @extend %bare-image
+    max-height: 50rem
+
 img
-    max-width: 100% 
+    max-width: 100%
 
 ol, ul
     padding-left: 1rem

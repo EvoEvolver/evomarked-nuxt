@@ -29,13 +29,22 @@ body
 article
     margin: auto
     max-width: 50rem
-    padding-right: 2rem
-    padding-left: 2rem
+    
     padding-top: 1.5rem
     padding-bottom: 20rem
     
     font-family: "Times New Roman", Times, serif
     font-size: 1.2rem
+
+@media (max-width: $small-screen-width)
+    article
+        padding-right: 0.3rem
+        padding-left: 0.3rem
+
+@media (min-width: $small-screen-width)
+    article
+        padding-right: 2rem
+        padding-left: 2rem
 
 .title
     font-size: 2rem

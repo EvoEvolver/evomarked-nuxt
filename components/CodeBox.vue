@@ -65,13 +65,19 @@ function escapeHtml(value) {
 <style lang="sass" scoped>
 @import "./Layout/vars"
 
+@media (max-width: $small-screen-width)
+    pre > code
+        font-size: $normal-font-size*0.9
+
 .lang-tag
     position: absolute
-    right: 0.3rem
-    bottom: -0.8rem
+    right: 0.2rem
+    bottom: -1rem
     color: rgba(0, 0, 0, 0.267)
 
 .code-box
     @extend %scroll-box
     position: relative
+    width: 100%
+
 </style>

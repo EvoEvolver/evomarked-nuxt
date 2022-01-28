@@ -39,7 +39,7 @@
                 </a>
                 <span class="navbar-item">
                     <FullScreenPanel>
-                        <CreditManifest></CreditManifest>
+                        <DocumentInfo></DocumentInfo>
                         <template v-slot:icon>
                             <img
                                 class="navicon"

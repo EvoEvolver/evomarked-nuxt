@@ -45,6 +45,7 @@ $horizontal-per-small-screen: 10%
     overflow: scroll
     overflow-x: hidden
     overflow-y: auto
+    padding-top: 1.5rem
 
 @media (max-width: $small-screen-width)
     .panel-body

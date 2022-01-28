@@ -35,7 +35,10 @@ export default {
 .remark-box
   @extend %block
 .remark-caption-box
+  font-size: $minor-font-size
   &>:first-child::before
     content: 'Caption: '
     font-weight: bold
+  > p
+    text-align: center
 </style>

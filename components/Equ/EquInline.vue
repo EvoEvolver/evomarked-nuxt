@@ -1,5 +1,5 @@
 <template>
-  <span ref="math"></span>
+  <span ref="math" class="inline-math"></span>
 </template>
 
 <script>
@@ -28,5 +28,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="sass">
+.inline-math
+  z-index: initial
 </style>

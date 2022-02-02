@@ -1,14 +1,6 @@
 <template>
-    <div style="position: relative;" v-if="prevPage || nextPage">
-        <div style="position: absolute; top:0; right: 0;text-align: center;">
-            <a
-                class="prev-next-button"
-                style="text-align:right;"
-                v-if="nextPage"
-                :href="(typeof nextPage == 'string') ? nextPage : nextPage.link"
-            >{{ nextPageTitle }} →</a>
-        </div>
-        <div style="position: absolute; top:0; left: 0;text-align: center;">
+    <div v-if="prevPage || nextPage" style="display: flex;">
+        <div style="width: 48%; text-align: center;">
             <a
                 class="prev-next-button"
                 style="text-align:left;"
@@ -16,12 +8,20 @@
                 :href="(typeof prevPage == 'string') ? prevPage : prevPage.link"
             >← {{ prevPageTitle }}</a>
         </div>
+        <div style="width: 48%; text-align: center;">
+            <a
+                class="prev-next-button"
+                style="text-align:right;"
+                v-if="nextPage"
+                :href="(typeof nextPage == 'string') ? nextPage : nextPage.link"
+            >{{ nextPageTitle }} →</a>
+        </div>
     </div>
 </template>
 <script setup>
 import { inject, computed } from "vue"
 
-const reactiveEnv = inject('reactiveEnv')
+const globalEnv = inject('globalEnv')
 const pageEnv = inject('pageEnv')
 
 // prevPage , nextPage can be a string or a dict like {title:"",link:""}
@@ -32,9 +32,9 @@ function getTitle(page) {
     if (page.title)
         return page.title
     if (typeof page == "string") {
-        return reactiveEnv.value?.globalEnv?.pageInfo[page]?.title || page
+        return globalEnv.value?.pageInfo[page]?.title || page
     } else {
-        return reactiveEnv.value?.globalEnv?.pageInfo[page.link]?.title || page.link
+        return globalEnv.value?.pageInfo[page.link]?.title || page.link
     }
 }
 

@@ -8,7 +8,7 @@
                             <img class="navicon" src="./chapters.svg" alt="chapters" />
                         </template>
                         <template v-slot:content>
-                            <NavBarContentTable :pageInfoList="pageInfoList" />
+                            <NavBarContentTable :pageInfoList="pageInfoList"/>
                         </template>
                     </NavBarDropdown>
                 </span>
@@ -60,12 +60,12 @@
 import { inject, computed, onMounted } from "vue"
 
 const pageEnv = inject('pageEnv')
-const reactiveEnv = inject('reactiveEnv')
+const globalEnv = inject('globalEnv')
 
 const pageInfoList = computed(() => {
-    if (!reactiveEnv.value.globalEnv)
+    if (!globalEnv.value)
         return null
-    let pageInfo = reactiveEnv.value.globalEnv.pageInfo
+    let pageInfo = globalEnv.value.pageInfo
     let pageKeyList = pageEnv.linearize
     if (!pageKeyList) {
         pageKeyList = Object.keys(pageInfo)
@@ -139,6 +139,10 @@ onMounted(() => {
 
 @media (max-width: $small-screen-width)
     .navbar-title
+        display: none
+
+@media print
+    #navbar
         display: none
 
 </style>

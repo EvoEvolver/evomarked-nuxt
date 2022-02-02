@@ -1,6 +1,6 @@
 <template>
-  <a :href="pageURL + '#' + label">
-    <slot>{{ idName }}</slot>
+  <a :href="pageURL">
+    <slot>{{ idName || "Here" }}</slot>
   </a>
 </template>
 
@@ -10,35 +10,37 @@ const props = defineProps({
   label: String
 })
 import { inject, computed } from "vue"
-const reactiveEnv = inject('reactiveEnv')
+const globalEnv = inject('globalEnv')
 
 const matchedPage = computed(() => {
   if (props.page)
     return props.page
-  if (!reactiveEnv.value.globalEnv)
+  if (!globalEnv.value)
     return null
 
-  for (let page in reactiveEnv.value.globalEnv.idNames) {
-    if (reactiveEnv.value.globalEnv.idNames[page][props.label]) {
+  for (let page in globalEnv.value.idNames) {
+    if (globalEnv.value.idNames[page][props.label]) {
       return page
     }
   }
 })
 
 const idName = computed(() => {
-  if (!reactiveEnv.value.globalEnv)
-    return "Here"
+  if (!globalEnv.value)
+    return
   let pageDict
   if(props.page)
-    pageDict = reactiveEnv.value.globalEnv.idNames[props.page]
+    pageDict = globalEnv.value.idNames[props.page]
   else
-    pageDict = reactiveEnv.value.globalEnv.idNames[matchedPage.value]
+    pageDict = globalEnv.value.idNames[matchedPage.value]
 
   if (!pageDict)
-    return "Here"
+    return "Page" + props.page + "not found"
+  if(!props.label)
+    return globalEnv.value.pageInfo[props.page].title
   let labelDict = pageDict[props.label]
   if (!labelDict)
-    return "Here"
+    return
   // Display the title if there is one
   if(labelDict.title)
     return labelDict.tagName + ": " + labelDict.title
@@ -51,6 +53,8 @@ const pageURL = computed(()=>{
     let URL = props.page || matchedPage.value
     if(URL=="index")
       URL = "/"
+    if(props.label)
+      URL += "#" + props.label
     return URL
 })
 </script>

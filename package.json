@@ -1,10 +1,11 @@
 {
   "name": "evomarked-nuxt",
   "version": "0.0.1",
+  "license": "MIT",
   "main": "./nuxt.config.js",
   "dependencies": {
+    "@popperjs/core": "^2.11.2",
     "highlight.js": "^11.4.0",
-    "katex": "^0.13.18",
-    "tippy.js": "^6.3.3"
+    "katex": "^0.13.18"
   }
 }

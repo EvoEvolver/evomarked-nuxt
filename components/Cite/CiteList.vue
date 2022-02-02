@@ -1,13 +1,13 @@
 <template>
   <div class="reference-list" v-if="referenceInfo.length != 0">
     <h1>Reference</h1>
-    <p
+    <div
       v-for="(refInfo, index) of referenceInfo"
       :key="index"
       :id="'cite-def-' + refInfo.key"
       class="cite-def"
     >
-      {{ index + 1 }}.
+      <span>{{ refInfo.index }}. </span>
       <HoverTip v-for="(authorName, index) of refInfo.author" interactive="true">
         {{ authorName[2] + ",&nbsp;" }}
         <template v-slot:tip>
@@ -31,12 +31,13 @@
         </a>
         <template v-slot:tip>Google Scholar</template>
       </HoverTip>
-    </p>
+    </div>
   </div>
 </template>
 
 <script>
 import HoverTip from "../HoverTip.vue"
+import { getAuthorList } from "./citeHelper"
 export default {
   inject: ["pageEnv"],
   components: {
@@ -49,36 +50,26 @@ export default {
     };
   },
   methods: {
-    getEntry(key) {
-      let entryItem = this.bibDict[key];
-      if (entryItem) return entryItem.entryTags;
-      else return null;
-    },
-    getItemContent(key) {
-      let entry = this.getEntry(key);
-      if (entry)
-        return [
-          entry.title,
-          entry.journal + " (" + entry.year + ")",
-        ].join(", ");
-      else return key;
-    },
-    getAuthorList(key) {
-      let entry = this.getEntry(key);
-    }
   },
   computed: {
     referenceInfo: function () {
       let refInfoList = []
-      for (let key of this.citedKeys) {
-        let entry = this.getEntry(key);
+      for (let i in this.citedKeys) {
+        let entry = this.bibDict[this.citedKeys[i]]?.entryTags;
         if (!entry) continue
+        let publisher = ""
+        if (entry.journal) {
+          publisher += entry.journal
+          if (entry.year)
+            publisher += " (" + entry.year + ")"
+        }
         let refInfo = {
           author: getAuthorList(entry.author),
           title: entry.title,
-          publish: entry.journal + " (" + entry.year + ")",
+          publish: publisher,
           url: entry.url,
-          key: key
+          key: this.citedKeys[i],
+          index: Number(i) + 1
         }
         refInfoList.push(refInfo)
       }
@@ -86,48 +77,11 @@ export default {
     }
   }
 };
-function getAuthorList(authorStr) {
-  if (!authorStr) return ["Author error!"]
-  let strSplit = authorStr.split("and");
-  let authorList = [];
-  for (let term of strSplit) {
-    let last, first;
-    let nameTuple = term.split(",");
-    last = nameTuple[0]?.trim();
-    first = nameTuple[1]?.trim();
-    let abbrFirst = [];
-    if (first) {
-      for (let p of first.split("-")) {
-        abbrFirst.push(p[0] + ".");
-      }
-    }
-    authorList.push([first, last, abbrFirst.join("-") + " " + last]);
-  }
-  return authorList
-}
-
-function getDisplayName(authorStr) {
-  let strSplit = authorStr.split("and");
-  let authorList = [];
-  for (let term of strSplit) {
-    let last, first;
-    let nameTuple = term.split(",");
-    last = nameTuple[0];
-    first = nameTuple[1];
-    let abbrFirst = [];
-    for (let p of first.trim().split("-")) {
-      abbrFirst.push(p[0] + ".");
-    }
-    authorList.push(abbrFirst.join("-") + " " + last.trim());
-  }
-  return authorList.join(", ");
-}
 </script>
 
 <style lang="sass">
+@import "../Layout/vars"
 
 .cite-def
-  a
-    color: black
-    margin: 0.5rem
+  margin-top: 0.2rem
 </style>

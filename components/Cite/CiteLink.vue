@@ -1,5 +1,5 @@
 <template>
-[<SmartLink :target="citingKeyIds">
+  [<PreviewLink :target="citingKeyIds">
     <span
       class="cite-link"
       v-for="(item, index) in tagGroups"
@@ -9,29 +9,26 @@
         citedKeys[Number(Array.isArray(item) ? item[0] : item) - 1]
       "
     >{{ Array.isArray(item) ? item[0] + "-" + item[1] : item }}</span>
-  </SmartLink>
-  <HoverTip v-if="missedKeys" interactive="true">?<template v-slot:tip>
-      Missing key: <strong v-for="(item, index) in missedKeys"> {{item+" "}} </strong>
+  </PreviewLink>
+  <HoverTip v-if="missedKeys">
+    ?
+    <template v-slot:tip>
+      Missing key:
+      <strong v-for="(item, index) in missedKeys">{{ item + " " }}</strong>
     </template>
   </HoverTip>]
 </template>
 <script>
-import HoverTip from "../HoverTip.vue";
-import SmartLink from "../SmartLink.vue";
 export default {
   methods: {},
   inject: ["pageEnv"],
   props: {
-    citingKey:{
-      default:()=>[]
+    citingKey: {
+      default: () => []
     },
-    missedKeys:{
-      default:null
+    missedKeys: {
+      default: null
     }
-  },
-  components: {
-    HoverTip: HoverTip,
-    SmartLink,
   },
   data() {
     return {
@@ -46,27 +43,26 @@ export default {
       this.citingKey.forEach((key) => {
         citingKeyIds.push("cite-def-" + key);
       });
-      return citingKeyIds
+      return citingKeyIds;
     },
     citingItems() {
       return this.bibDict["li2018echarts"];
     },
     tagGroups() {
       let tagList = [];
-
       this.citingKey.forEach((key) => {
         tagList.push(this.citedKeys.indexOf(key) + 1);
       });
-
-      tagList.sort();
-
+      tagList.sort((a, b) => a - b);
+      console.log(tagList)
       let tagGroups = [];
-
       for (let i = 0; i < tagList.length;) {
         let groupLen = 1;
         for (let j = i + 1; j < tagList.length; j++) {
-          if (tagList[j] != tagList[j - 1] + 1) break;
-          else groupLen += 1;
+          if (tagList[j] != tagList[j - 1] + 1)
+            break;
+          else
+            groupLen += 1;
         }
         if (groupLen == 1) {
           tagGroups.push(tagList[i]);
@@ -85,22 +81,21 @@ export default {
       }
       return tagGroups;
     },
-  },
+  }
 };
 </script>
 
 <style lang="sass">
-  
+
 .cite-link::before
-    content: ","
-    
+  content: ","
+
 .cite-link:first-child::before
-    content: ""
+  content: ""
 
 .cite-links
   &::before
-      content: "["
+    content: "["
   &::after
-      content: "]"
-
+    content: "]"
 </style>

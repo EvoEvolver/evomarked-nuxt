@@ -1,11 +1,11 @@
 <template>
   <div>
     <RemarkBox :title="title" :id="id" :index="index" type="Table">
-      <p class="table-box">
+      <div class="table-box">
         <slot></slot>
-      </p>
+      </div>
       <template v-slot:caption>
-        <slot name="caption"></slot>
+          <slot name="caption"></slot>
       </template>
     </RemarkBox>
   </div>
@@ -25,6 +25,8 @@ const props = defineProps({
 
 <style lang="sass">
 
+@import "./Layout/vars"
+
 .table-box
   > table
     min-width: 60%
@@ -34,4 +36,7 @@ const props = defineProps({
     border: 1px solid black
     border-collapse: collapse
     text-align: center
+  thead
+    font-weight: bold
+    background-color: rgba(0, 0, 0, 0.2)
 </style>

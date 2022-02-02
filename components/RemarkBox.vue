@@ -2,18 +2,13 @@
   <div class="remark-box" :id="id">
     <span v-if="!hideHead">
       <span style="font-weight: bold">{{ type }} {{ index }}</span>
-      <span v-if="title">({{ title }})</span>
+      <span v-if="title"> ({{ title }})</span>
     </span>
-    <p style="width:100%">
+    <div style="width:100%">
       <slot></slot>
-    </p>
-    <div style="text-align:left;" v-if="this && this.$slots.caption" class="minor-text">
+    </div>
+    <div style="text-align:left;" class="minor-text">
       <div style="margin: auto;">
-      <!--
-        <p style="display:inline;">
-          {{ type }} {{ index }}
-          <span v-if="title">({{ title }})</span>:&nbsp;
-        </p>-->
         <div class="remark-caption-box">
           <slot name="caption"></slot>
         </div>
@@ -37,7 +32,7 @@ export default {
 .remark-caption-box
   font-size: $minor-font-size
   &>:first-child::before
-    content: 'Caption: '
+    content: ''
     font-weight: bold
   > p
     text-align: center

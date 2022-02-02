@@ -1,5 +1,5 @@
 <template>
-  <Html>
+<div><Html>
     <Head>
       <Link
         rel="stylesheet"
@@ -9,8 +9,13 @@
       />
     </Head>
     <LayoutDefault><slot></slot></LayoutDefault>
-  </Html>
+  </Html></div>
 </template>
 
-<script>
+<script setup>
+defineProps({
+  name:{}
+})
 </script>
+<style lang="sass">
+</style>

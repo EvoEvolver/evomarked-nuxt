@@ -54,7 +54,6 @@ export default {
         tagList.push(this.citedKeys.indexOf(key) + 1);
       });
       tagList.sort((a, b) => a - b);
-      console.log(tagList)
       let tagGroups = [];
       for (let i = 0; i < tagList.length;) {
         let groupLen = 1;

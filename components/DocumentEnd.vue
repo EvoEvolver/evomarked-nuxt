@@ -7,10 +7,6 @@
 </template>
 
 <script>
-import CiteList from "./Cite/CiteList.vue";
-export default {
-    components: { CiteList }
-}
 </script>
 
 <style lang="sass" scoped>

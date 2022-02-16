@@ -21,7 +21,7 @@
       </span>
     </div>
     <div class="author-note-box">
-      <p
+      <div
         v-for="(value, key, index) of affilIndices"
         :key="index"
         class="author-note-define"
@@ -29,8 +29,8 @@
       >
         <sup>{{ index + 1 }}</sup>
         {{ affilDict[key] }}
-      </p>
-      <p
+      </div>
+      <div
         v-for="(value, key, index) of noteIndices"
         :key="index"
         class="author-note-define"
@@ -38,8 +38,7 @@
       >
         <sup>{{ getSupSymbol(value) }}</sup>
         {{ authorNotes[key] }}
-      </p>
-      <p></p>
+      </div>
     </div>
   </div>
 </template>

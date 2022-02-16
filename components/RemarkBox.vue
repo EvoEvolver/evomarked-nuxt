@@ -4,7 +4,7 @@
       <span style="font-weight: bold">{{ type }} {{ index }}</span>
       <span v-if="title"> ({{ title }})</span>
     </span>
-    <div style="width:100%">
+    <div style="width:100%;margin-top: 0.3rem;margin-bottom: 0.3rem;">
       <slot></slot>
     </div>
     <div style="text-align:left;" class="minor-text">
@@ -30,10 +30,10 @@ export default {
 .remark-box
   @extend %block
 .remark-caption-box
+  text-align: center
   font-size: $minor-font-size
   &>:first-child::before
     content: ''
     font-weight: bold
-  > p
-    text-align: center
+    
 </style>

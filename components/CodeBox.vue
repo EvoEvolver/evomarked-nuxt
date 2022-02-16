@@ -79,6 +79,6 @@ function escapeHtml(value) {
     @extend %scroll-box
     position: relative
     width: 100%
-    z-index: -1
+    z-index: 0
 
 </style>

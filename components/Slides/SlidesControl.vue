@@ -70,12 +70,13 @@ watch(() => currPlayIndex.value, (val, oldVal) => {
 <!--https://www.gradient-animator.com/-->
 <style>
 .attention-box {
-    background: linear-gradient(270deg, #ffffff, rgba(69, 196, 255, 0.3));
+    background: linear-gradient(270deg, rgba(255,255,255,0.0), rgba(69, 196, 255, 0.1));
     background-size: 500% 500%;
-
+    z-index:-3;
     -webkit-animation: AnimationName 4s ease infinite;
     -moz-animation: AnimationName 4s ease infinite;
     animation: AnimationName 4s ease infinite;
+    
 }
 
 @-webkit-keyframes AnimationName {

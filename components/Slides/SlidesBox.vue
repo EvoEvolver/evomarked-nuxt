@@ -168,18 +168,19 @@ const props = defineProps({
 
 // Slide Settings
 // TODO make useCookie work
-
-let voiceSpeed = useCookie("voiceSpeed")
+const cookieOption = {sameSite: true}
+let voiceSpeed = useCookie("voiceSpeed", cookieOption)
 voiceSpeed.value = voiceSpeed.value || 60
-let voicePitch = useCookie("voicePitch")
+let voicePitch = useCookie("voicePitch", cookieOption)
 voicePitch.value = voicePitch.value || 60
-let voiceStyleName = useCookie("voiceStyleName")
-voiceStyleName.value = voiceStyleName.value || null
+let voiceStyleSetting = useCookie("voiceStyleSetting", cookieOption)
+voiceStyleSetting.value = voiceStyleSetting.value || {}
+
 let slidesSettings = ref({
     voiceSpeed: voiceSpeed,
     voicePitch: voicePitch,
-    voiceStyleName: voiceStyleName,
-    //autoPlaySpeed: 50
+    voiceStyleName: voiceStyleSetting.value[props.voiceLang],
+    voiceStyleSetting: voiceStyleSetting
 })
 provide("slidesSettings", slidesSettings)
 
@@ -200,6 +201,9 @@ onMounted(() => {
     // TODO unmount the listeners when destroy
 })
 
+onBeforeUnmount(() => {
+})
+
 function keyup(e) {
     console.log(e.key)
     if (e.key == "ArrowRight" || e.key == " ")
@@ -211,9 +215,6 @@ function keyup(e) {
     if (e.key == "ArrowDown")
         slidesComp.value.next()
 }
-
-onBeforeUnmount(() => {
-})
 
 // add the reference of slides
 let slidesContents = []
@@ -230,7 +231,6 @@ function playCurrSlide() {
      * Will end next slide if all contents are played
      * This function will be given to SlidesBox and be called by it
      */
-    //console.log(currSlide.value)
     if (currSlide.value.currPlayIndex.value >= currSlide.value.maxPlayIndex.value) {
         currSlide.value.currPlayIndex.value = currSlide.value.maxPlayIndex.value + 1
         slidesComp.value.next()
@@ -269,7 +269,7 @@ function makeSlidesFullScreen() {
     openFullscreen(slidesBox.value)
 }
 
-const _fixedDefaultSlideRatio = 3/4
+const _fixedDefaultSlideRatio = 3 / 4
 const defaultSlideRatio = ref(_fixedDefaultSlideRatio)
 const slideRatio = ref(defaultSlideRatio.value)
 
@@ -306,7 +306,7 @@ function onResize() {
         isSmallScreen.value = true
     } else {
         defaultSlideRatio.value = _fixedDefaultSlideRatio
-        if(!isSlidesFullScreen.value)
+        if (!isSlidesFullScreen.value)
             slideRatio.value = _fixedDefaultSlideRatio
         isSmallScreen.value = false
     }

@@ -1,9 +1,7 @@
-import { defineNuxtConfig } from 'nuxt3'
+import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
   build: {
     transpile: ['@popperjs/core', 'highlight.js']
   },
-  vite: false,
-  ssr: process.env.NODE_ENV == 'development' ? false : true
 })
